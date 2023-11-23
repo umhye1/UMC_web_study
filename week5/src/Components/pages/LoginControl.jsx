@@ -1,93 +1,46 @@
-import React, {useState} from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-function LoginControl(){
+// hook. usestate 이용해서 로그인 버튼 구현
 
-    const 
-}
-
-function LoginMessage(props){
-    return<p>환영합니다!</p>;
-}
-
-function LogoutMessage(props){
-    return <p>로그인 해주세요!</p>;
-}
-
-function LoginButton(props){
-    return (
-        <StyledButton onClick={props.onClick}>
-          로그인
-        </StyledButton>
-      );
-}
-
-function LogoutButton(props){
-    return (
-        <StyledButton onClick={props.onClick}>
-          로그아웃
-        </StyledButton>
-      );
-}
-
-function Message(props){
-    const isLoggedIn=props.isLoggedIn;
-    if(isLoggedIn){ //false
-        return <LoginMessage />;
+const LoginControl = () => {
+    
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [message, setMessage] = useState('로그인 해주세요!');
+    
+    const toggleLogin = () => {
+        setIsLoggedIn(!isLoggedIn);
+        setMessage(isLoggedIn ? '로그인 해주세요!' : '환영합니다!');
     }
-    else{
-        return <LogoutMessage />;
+
+
+    const LoginButton = () => {
+        return (
+            <StyledButton onClick={toggleLogin}>
+                로그인
+            </StyledButton>
+        );
     }
+
+    const LogoutButton = () => {
+        return (
+            <StyledButton onClick={toggleLogin}>
+                로그아웃
+            </StyledButton>
+        );
+    }
+
+    return (
+        <LoginLayout>
+            {isLoggedIn ? <LogoutButton /> : <LoginButton />}
+            <LoginMessageLayout>
+                <div> {message} </div>
+            </LoginMessageLayout>
+        </LoginLayout>
+    );
 }
 
-// class LoginControl extends React.Component{
-//     constructor(props){
-//     super(props) // this 사용하기 위해서는 constructor에 super 호출해야함
-//     this.state={
-//         isLoggedIn:false,
-//     }
-//     this.handleLoginClick = this.handleLoginClick.bind(this);
-//     this.handleLogoutClick=this.handleLogoutClick.bind(this);
-//     }
 
-//     handleLoginClick(){
-//         this.setState({
-//             isLoggedIn : true,
-//         });
-//     }
-//     handleLogoutClick(){
-//         this.setState({
-//             isLoggedIn: false,
-//         });
-//     }
-
-//     render(){
-//         const isLoggedIn = this.state.isLoggedIn;
-//         let button;
-//         if(isLoggedIn){ // false
-//             button = <LogoutButton onClick ={this.handleLogoutClick} />;
-//         }
-//         else{
-//             button = <LoginButton onClick ={this.handleLoginClick} />;
-//         }
-        
-//         return (
-//          <LoginLayout>
-//             {isLoggedIn
-//                 ? <LogoutButton onClick={this.handleLogoutClick} />
-//                 : <LoginButton onClick={this.handleLoginClick} />
-//             }
-//             <LoginMessageLayout>
-//                 <Message isLoggedIn={isLoggedIn} />
-//             </LoginMessageLayout>
-//          </LoginLayout>
-//         );
-//       }
-// }
-
-const root = ReactDOM.createRoot(document.getElementById('root')); 
-root.render(<LoginControl />);
 
 export default LoginControl;
 
@@ -100,7 +53,7 @@ const LoginLayout = styled.div`
   margin:20px;
 `;
 
-const LoginMessageLayout =styled.div`
+const LoginMessageLayout = styled.div`
     display: flex;
     margin:10px;
     font-size:13px;
