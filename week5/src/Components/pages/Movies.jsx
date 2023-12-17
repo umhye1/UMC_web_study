@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { movies } from "../../Data/movieDummy";
+import { movies } from "../../Data/Dummy";
 import { Movie } from "./Movie";
 
 

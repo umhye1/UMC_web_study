@@ -43,6 +43,49 @@ export const Movie = ({ backImg, title, star, detail }) => {
   );
 };
 
+
+export const TvProgram = ({ backImg, title, star, detail }) => {
+  const [isHovering, setIsHovering] = useState(false);
+  const navigate = useNavigate();
+
+  const onClickImg = () => {
+    navigate(`/tv/${title}`, {    //navigate(`/comment/id/등등 내가 원하는 주소`) 여기서는 movie의 title
+      state: { backImg },   // state:{넘기고자 하는 정보, 높은 확률로 props}
+    });
+  };
+  const ImgUrlBase = 'https://image.tmdb.org/t/p/w500/';
+
+  const handleMouseOver = () => {
+    setIsHovering(true);
+  };
+  const handleMouseOut = () => {
+    setIsHovering(false);
+  };
+  return ( // html 같이 쓰는거임
+  
+    <MovieContainer
+      onClick={onClickImg}
+      onMouseOver={() => handleMouseOver()}
+      onMouseOut={() => handleMouseOut()}
+    >
+      {isHovering && (
+        <HoverBase>
+          <HoverTitle>{title}</HoverTitle>
+          <HoverSub>{detail}</HoverSub>
+        </HoverBase>
+      )}
+
+      <MovieImg src={ImgUrlBase + backImg} alt="Tv poster"></MovieImg>
+      <TextContainer>
+        <MovieTitle>{title}</MovieTitle>
+        <MovieStar>{star}</MovieStar>
+      </TextContainer>
+    </MovieContainer>
+  );
+};
+
+
+
 const MovieContainer = styled.div`
   width: 200px;
   height: 320px;

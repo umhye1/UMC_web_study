@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 // hook. usestate 이용해서 로그인 버튼 구현
 
@@ -8,9 +9,13 @@ const LoginControl = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [message, setMessage] = useState('로그인 해주세요!');
     
+
+    const navigate = useNavigate();
+
     const toggleLogin = () => {
         setIsLoggedIn(!isLoggedIn);
         setMessage(isLoggedIn ? '로그인 해주세요!' : '환영합니다!');
+        navigate(isLoggedIn ? '/login' : '/');
     }
 
 
@@ -65,7 +70,3 @@ const StyledButton = styled.button`
     width: 60px;
     font-size: 13px;
 `;
-
-
-
-

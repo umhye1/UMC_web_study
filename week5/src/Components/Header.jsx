@@ -2,7 +2,6 @@ import React from 'react';
 import { Link} from 'react-router-dom';
 import styled from 'styled-components';
 import LoginControl  from './pages/LoginControl';
-import { loginButton, logoutButton } from './pages/LoginControl';
 
 
 export const Header = () => {

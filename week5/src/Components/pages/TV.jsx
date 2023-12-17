@@ -1,7 +1,24 @@
 import styled from 'styled-components';
+import { tv } from "../../Data/Dummy";
+import { Movie } from "./Movie";
+
+
 
 export const TV = () => {
-  return <ContentLayout>TV</ContentLayout>;
+  return (
+    <ContentLayout>
+       {tv.results.map((TvProgram) => {
+          return (
+            <Movie
+              backImg={TvProgram.backdrop_path}
+              title={TvProgram.title}
+              star={TvProgram.vote_average}
+              detail={TvProgram.overview}
+            />
+          );
+        })}
+    </ContentLayout>
+  );
 };
 const ContentLayout = styled.div`
   height: 100vh;
@@ -9,3 +26,5 @@ const ContentLayout = styled.div`
   color: white;
   background-color: #464b8d;
 `;
+
+
